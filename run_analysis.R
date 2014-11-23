@@ -142,7 +142,7 @@ newFeatureList <- foreach(f=featureList, .combine='c', .inorder=TRUE) %do%
 names(data)<-newFeatureList
 
 # write merged data to file
-write.table(data,"mergeddata.txt",row.names=FALSE)
+write.table(data,"mergeddata.txt",row.name=FALSE)
 
 # 5. From the data set in step 4, creates a second, independent tidy data set 
 # with the average of each variable for each activity and each subject.
@@ -158,4 +158,4 @@ newTidyData <-
   summarise_each(funs(mean),-subject.id,-activity.name) 
 
 # write newTidyData to file
-write.table(newTidyData,"tidydata.txt",row.names=FALSE)
+write.table(newTidyData,"tidydata.txt",row.name=FALSE)
