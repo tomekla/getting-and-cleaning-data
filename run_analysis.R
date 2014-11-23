@@ -24,7 +24,7 @@ unzip(localZipFile)
 list.files(".")
 
 # record date downloaded
-dateDownloaded <- date()
+#dateDownloaded <- date()
 
 # Read Datasets and Assign column labels based on the files provided in the Zip.
 # Labels are assigned immediately on read of dataset to prevent a variety of 
@@ -37,7 +37,7 @@ names(features)<-c("feature.number","feature.name")
 
 activityLabels <- tbl_df(read.table(paste(ucidir,"/activity_labels.txt",sep=""),
   header=FALSE,sep="",strip.white=TRUE,stringsAsFactors=FALSE,skipNul=TRUE))
-names(activityLabels) <- c("activity.number","activity_label")
+names(activityLabels)<-c("activity.number","activity.label")
 
 subjecttest <- tbl_df(read.table(paste(testdir,"/subject_test.txt",sep=""),
   header=FALSE,sep="",strip.white=TRUE,stringsAsFactors=FALSE))
@@ -88,7 +88,7 @@ data <- data %>%
 # 3. Uses descriptive activity names to name the activities in the data set
 
 data <- data %>%
-  mutate(activity.name=tolower(activityLabels$activity_label[activity.number]))
+  mutate(activity.name=tolower(activityLabels$activity.label[activity.number]))
 
 # 4. Appropriately labels the data set with descriptive variable names. 
 # Original feature names are structured, used structure to build descriptive name 
@@ -141,8 +141,8 @@ newFeatureList <- foreach(f=featureList, .combine='c', .inorder=TRUE) %do%
 
 names(data)<-newFeatureList
 
-# write merged data to CSV file
-write.csv(data, "mergeddata.csv", row.names=FALSE)
+# write merged data to file
+write.table(data,"mergeddata.txt",row.names=FALSE)
 
 # 5. From the data set in step 4, creates a second, independent tidy data set 
 # with the average of each variable for each activity and each subject.
@@ -157,9 +157,5 @@ newTidyData <-
   group_by(subject.id,activity.name) %>%
   summarise_each(funs(mean),-subject.id,-activity.name) 
 
-# sort measure columns alphabetically for readability 
-# and to match code book
-#newTidyData <- newTidyData[,c(names(newTidyData)[1:2],sort(names(newTidyData)[3:length(names(newTidyData))]))]
-
-# write newTidyData to CSV file
-write.csv(newTidyData, "tidydata.csv", row.names=FALSE)
+# write newTidyData to file
+write.table(newTidyData,"tidydata.txt",row.names=FALSE)

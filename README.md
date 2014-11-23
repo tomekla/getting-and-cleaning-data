@@ -15,6 +15,6 @@ To execute the script do the following:
 - Change directory such that "data" is the local directory.
 - Source the script "run_analysis.R" in RStudio 	- source('~/run_analysis.R')
 - You will find two output files are generated in the "data" directory 
-	- mergeddata.csv: clean data with one row for each time a subject and activity was measured with each of the measured variables; this data is 10299*68 dimension
-	- tidydata.csv: tidy data showing one row for each subject/activity tuple with averages for each of the measured variables; this data is 180*68 dimenion 
-- You can read tidydata.csv in an editor of your choice, or read the data into R using tidydata<-read.table("./tidydata.csv").
+	- mergeddata.txt: clean data with one row for each time a subject and activity was measured with each of the measured variables; this data is 10299*68 dimension
+	- tidydata.txt: tidy data showing one row for each subject/activity tuple with averages for each of the measured variables; this data is 180*68 dimenion 
+- You can read tidydata.txt in an editor of your choice, or read the data into R using tidydata<-read.table("./tidydata.txt").
